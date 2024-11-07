@@ -5,7 +5,7 @@ import { type } from "os";
 const userSchema = new mongoose.Schema({
     username:{
         type : String , 
-        required : true , 
+        required : false , 
         unique : true , 
         trim : true , 
         lowercase : true
@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     } , 
     fullName : {
         type : String , 
-        required : true
+        required : false
     } , 
     notes : [{
         type : mongoose.Schema.Types.ObjectId , 
