@@ -1,8 +1,9 @@
 import express from "express";
 const router = express.Router();
 import * as notesController from "../controllers/notesController.js"
+import authMiddleware from '../middlewares/authMidllware.js'
 
-// GETTING THE NOTES
-router.get("/allNotes" , notesController.getNotesController);
+// POSTING THE NOTE
+router.post("/post" , authMiddleware , notesController.createNote);
 
 export default router;

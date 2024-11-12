@@ -21,8 +21,9 @@ export const registerController = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '1d' }
         );
+        console.log("User Registered Successfully !")
         res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production", maxage: 60 * 60 * 1000 });
-        res.status(200).json({ message: "User registered successfully", user: savedUser });
+        res.status(200).json({ message: "User registered successfully", token:token ,user: savedUser });
     } catch (error) {
         res.status(404).json({ message: "An error was found.", error: error.message });
         console.log(error);
@@ -33,8 +34,8 @@ export const registerController = async (req, res) => {
 export const loginController = async (req ,res) => {
     let existingUser;
     try {
-        const { username, email, password } = req.body;
-        existingUser = await User.findOne({ $or: [{ email }, { username }] });
+        const { email, password } = req.body;
+        existingUser = await User.findOne({ email });
         if (!existingUser) {
             res.status(404).json("User not found !");
         }
@@ -48,10 +49,10 @@ export const loginController = async (req ,res) => {
             { expiresIn: '1d' }
         );
         res.cookie("token" , token , {httpOnly : true , secure : process.env.NODE_ENV == "production"});
-        return res.status(200).json({message:"User logged in successfully !" , user :existingUser});
+        return res.status(200).json({message:"User logged in successfully !" , token:token ,user :existingUser});
 
     } catch (error) {
-        res.status(400).json({ message: "An error was found", error: error.message });
+        return res.status(400).json({ message: "An error was found", error: error.message });
         console.log(error);
     }
 }

@@ -5,8 +5,6 @@ import { type } from "os";
 const userSchema = new mongoose.Schema({
     username:{
         type : String , 
-        required : false , 
-        unique : true , 
         trim : true , 
         lowercase : true
     } , 

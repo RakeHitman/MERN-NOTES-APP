@@ -1,14 +1,13 @@
 import mongoose, { mongo } from "mongoose";
-import { title } from "process";
 
 const notesSchema = new mongoose.Schema({
     title : {
         type : String , 
         required : true ,
         trim : true ,
-        Default : "My Notes"
+        Default : "My Note"
     } , 
-    Note : {
+    content : {
         type: String , 
         required : true , 
     } , 
